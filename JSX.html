@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+   <script type="text/babel">
+const root = document.getElementById("root")
+const Title =()=> <h3 id="title" onMouseEnter={()=>console.log("mouse entered")}>Hello im' a title</h3>
+const Button =()=><button onClick={()=>console.log("hohoha")}>Click me!</button>
+const container = <div>
+    <button>ㅎㅎㅎ</button>//내가 만든 특별한 HTML태그가 아니면 이렇게 넣을 수있다.
+           <Title/>//첫글자는 반드시 대문자여야한다. 안그럼 HTML코드로 인식한다.
+           <Button/>
+          </div> //여기에 넣기 위해선 함수가 되어야함
+ReactDOM.render(container,root);
+    //HTML과 유사한 방법으로 작성이가능
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <script>
+    const root = document.getElementById("root");
+    const span = React.createElement(
+      "span",
+      { id: "sexy-span", style: { color: "red" } },
+      "Hello I'am span!"
+    );
+    const btn = React.createElement(
+      "button",
+      { onClick: () => console.log("im clicked"), style: { color: "red" } },
+      "click me"
+    );
+    ReactDOM.render(btn, root);
+  </script>
+</html>
+//React JS의 규칙 중 하나는 직접 HTML을 작성하지 않는다. //React JS는 만들고
+ReactDOM은 HTML에 둔다. //render는 사용자들에게 보여준다. 즉, HTML에 둔다.
+//바닐라 JS는 HTML을 먼저 만들고 JS를 시행한 반면 //React HS는 JS를 먼저한 후
+HTML을 시행한다. //React.createElement(만들것(HTML태그), 속성, 내용) //JSX는
+JS를 발전시킨것
