@@ -11,14 +11,14 @@
   ></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    const root = document.getElementById("root");
     function Box() {
-      const [data, change] = React.useState(5);
-      console.log(data);
+      const [counter, modifier] = React.useState(0); //React가 제공하는기능:배열로 데이터를 받음
+      //[undefine,f]의 형태로 data가 정의되는데 undefine은 data가되고 f는 data를 바꿀때 사용하는 함수
+      // undefine은 let count=0; 의 역할 f는 countUP()의 역할;
       return (
         <div>
-          <h1>Total clicked:{data}</h1>
-          <button>click</button>
+          <h1>Total clicked:{counter}</h1>
+          <button>Click!</button>
         </div>
       );
     }
