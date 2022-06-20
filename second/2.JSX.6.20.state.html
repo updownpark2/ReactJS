@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- 이게 JSX를 변환시켜준다. -->
+  <script type="text/babel">
+    //state는 기본적으로 데이터가 저장되는 곳이다.
+    const root = document.getElementById("root");
+    function Container() {
+      const data = React.useState(0); //useState가 let 선언과 countUp 함수의 역할을 둘 다 함
+      //useState 의 counter와 setCounter
+      //에서 setCounter는 counter의 값을 변경하고 랜더링을 실시한다.
+      console.log(data); //(2) [undefined, ƒ] 이렇게나옴
+      const [counter, setCounter] = data; //이렇게 선언을하면 간단하게 데이터를
+      //명명할 수 있다.!!!!!!!
+      const onClick = () => {
+        setCounter(counter + 1); //setCounter는 값을 하나만 받는다.
+        //위와 같은 성능은
+        //let counter = counter+1;
+        //ReactDOM.render(<Container />, root); 이 두 개와 같다.
+      };
+      return (
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={onClick}>click please</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<Container />, root); // 한번만 렌더링 되어 UI에 변화가없다.
+  </script>
+</html>
+<!-- 이렇게 let으로 counter를 생성하고  리렌더링 하는 방법보다 더 간단한 방법이 존재한다. -->

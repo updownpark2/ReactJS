@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- 이게 JSX를 변환시켜준다. -->
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    function Container() {
+      const data = React.useState(0);
+      const [count, setCount] = data;
+      const touch = () => {
+        setCount(count + 1); //인자가 그냥 바로 변수가 들어가야함 count에 들어갈 수!!
+      };
+      return (
+        <div>
+          <h2>Total touch :{count}</h2>
+          <button onClick={touch}>touch</button>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<Container />, root);
+  </script>
+</html>
+
+<!-- 이렇게 렌더링 하는 방법도 있지만 가장 좋은 방법은 아니다. 더 좋은 방법이 있다. -->
