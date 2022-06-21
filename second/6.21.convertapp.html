@@ -24,6 +24,10 @@
       const reset = () => {
         setMinutes(0);
       };
+      const [flipped, setFlipped] = React.useState(false);
+      const onFlip = () => {
+        setFlipped((current) => !current); //flipped가 true면 false가 되고 false면 true가 된다.
+      }; //핵심은 이거다 onFlip이라는 함수는 최근의 false를 true로 바꿔줄수있다는 거 계속 반복이 가능하다는거.
       return (
         <div>
           <h1>Super converter</h1>
@@ -31,20 +35,24 @@
           <input
             onChange={onChange} //onChange는 변화가 있을 때마다 적용되는 이벤트
             id="minutes"
-            value={minutes}
+            value={flipped ? minutes * 60 : minutes}
             placeholder="Min"
             type="number"
+            disabled={flipped === true}
           />
           <h3>you want to convert {minutes}</h3>
           <label htmlFor="hours">몇 시간</label>
           <input
-            value={Math.round(minutes / 60)}
+            value={Math.round(flipped ? minutes : minutes / 60)}
             id="hours"
             placeholder="Hours"
             type="number"
-            disabled
+            disabled={flipped === false}
+            // true or false에 따라 disabled하고 안하고 한다.
+            onChange={onChange}
           />
           <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>Flip</button>
         </div> //htmlFor로 해주지 않으면 JSX와 HTML은 매우 유사하기 때문에
         //javascript의 for로 인식을 한다. 그러면 오류가 발생
       );

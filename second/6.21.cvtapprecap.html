@@ -15,26 +15,47 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
+    const root = document.getElementById("root");
     function App() {
-      const [mit, setMit] = React.useState();
+      const [flip, setFlip] = React.useState(false);
+      const [num, setNum] = React.useState();
       const onChange = (event) => {
-        setMit(event.target.value); //setMit을 적용한다는 것은 계속 보여지게 만드는 것!!
-        //그냥 console.log(event.target.value) 이 값을 보여지게 만들어준다.
+        setNum(event.target.value); //변화가 일어난곳의 value가 num이되어 랜더링되는거다.
+      };
+      const reset = () => {
+        setNum(0);
+      };
+      const invert = () => {
+        setFlip(!flip);
       };
       return (
         <div>
-          <h1>Convert Time</h1>
-          <label htmlFor="si">시간을 바꾸자</label>
-          <input
-            value={mit}
-            onChange={onChange}
-            id="si"
-            placeholder="시간"
-            type="number"
-          />
-          <h3>your value={mit}</h3>
-          <label htmlFor="bun">분을 바꾸자</label>
-          <input id="bun" placeholder="분" type="number" />
+          <div>
+            <h1>단위변환기🧾</h1>
+            <label htmlFor="MM">"분(Minutes)"을 입력해주세요</label>
+            <input
+              onChange={onChange}
+              value={flip === false ? num : num * 60} //삼항연산자로 flip상태에 따라
+              //다르게 표현하기
+              id="MM"
+              type="number"
+              placeholder="분"
+              disabled={flip === true}
+            />
+          </div>
+          <div>
+            <label htmlFor="HH">"시간(Hours)"을 입력해주세요</label>
+            <input
+              value={flip === false ? Math.round(num / 60) : num}
+              id="HH"
+              type="number"
+              placeholder="시간"
+              onChange={onChange}
+              disabled={flip === false}
+            />
+          </div>
+          <button onClick={reset}>초기화</button>
+          <button onClick={invert}>전환</button>
         </div>
       );
     }
