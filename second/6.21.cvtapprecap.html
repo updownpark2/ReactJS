@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    function App() {
+      const [mit, setMit] = React.useState();
+      const onChange = (event) => {
+        setMit(event.target.value); //setMit을 적용한다는 것은 계속 보여지게 만드는 것!!
+        //그냥 console.log(event.target.value) 이 값을 보여지게 만들어준다.
+      };
+      return (
+        <div>
+          <h1>Convert Time</h1>
+          <label htmlFor="si">시간을 바꾸자</label>
+          <input
+            value={mit}
+            onChange={onChange}
+            id="si"
+            placeholder="시간"
+            type="number"
+          />
+          <h3>your value={mit}</h3>
+          <label htmlFor="bun">분을 바꾸자</label>
+          <input id="bun" placeholder="분" type="number" />
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

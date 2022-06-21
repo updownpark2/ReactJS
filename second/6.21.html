@@ -17,22 +17,22 @@
   <script type="text/babel">
     const root = document.getElementById("root");
     function Container() {
-      const data = React.useState(0); //console.log(data) => [undefined, f]
+      const data = React.useState(0);
       const [count, setCount] = data;
-      const touch = () => {
-        setCount(count + 1); //인자가 그냥 바로 변수가 들어가야함 count에 들어갈 수!!
+      const Onclick = () => {
+        //setCount(count + 1);//이렇게 state를 수정하는 방법이 1방법
+        //**2방법에대해 오늘은배울 것이다.** => setCount에 함수를 넣을 수 있다.
+        //setCount(현재값 => 함수)
+        setCount((current) => current + 1); // 이렇게 state를 사용하는게 더 안전하다
       };
+      //위에서 current는 현재값으로 count와 동일시 된다.
       return (
         <div>
-          <h2>Total touch :{count}</h2>
-          <button onClick={touch}>touch</button>
+          <h1>Your click : {count}</h1>
+          <button onClick={Onclick}>Click Me!!</button>
         </div>
       );
-      //여기서 h2 태그와 button의 태그는 HTML태그로서 내가 만든 것이 아님. 즉 속성이 없음
     }
-
     ReactDOM.render(<Container />, root);
   </script>
 </html>
-
-<!-- 이렇게 렌더링 하는 방법도 있지만 가장 좋은 방법은 아니다. 더 좋은 방법이 있다. -->
