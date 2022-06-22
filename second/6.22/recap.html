@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+      const [index, setIndex] = React.useState("0");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        //아래의 select에서 사용자가 변환한 option을 받아들일 수 있게됨
+        // useState()에서 앞선 변수는 앞으로 받을 값 또는 분별을 할 빈공간으로 생각해보자
+        <div>
+          <h1>Convert App!!</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="0">Cm & M</option>
+            <option value="1">Minutes & Hours</option>
+          </select>
+          {index === "0" ? <CmtoM /> : null}
+          {index === "1" ? <MinutestoHours /> : null}
+        </div> //null은 아무것도 하지 않을 때 사용하면된다.
+        //컴포넌트 안에 컴포넌트를 넣어 간략한 코딩을 할 수 있게함.
+        //select와 option은 HTML속성이다.
+      );
+    }
+    function MinutestoHours() {
+      const [flip, setFlip] = React.useState(false);
+      const [num, setNum] = React.useState();
+      const onChange = (event) => {
+        setNum(event.target.value); //변화가 일어난곳의 value가 num이되어 랜더링되는거다.
+      };
+      const reset = () => {
+        setNum(0);
+      };
+      const invert = () => {
+        setFlip(!flip);
+      };
+      return (
+        <div>
+          <div>
+            <label htmlFor="MM">"분(Minutes)"을 입력해주세요</label>
+            <input
+              onChange={onChange}
+              value={flip === false ? num : num * 60} //삼항연산자로 flip상태에 따라
+              //다르게 표현하기
+              id="MM"
+              type="number"
+              placeholder="분"
+              disabled={flip === true}
+            />
+          </div>
+          <div>
+            <label htmlFor="HH">"시간(Hours)"을 입력해주세요</label>
+            <input
+              value={flip === false ? Math.round(num / 60) : num}
+              id="HH"
+              type="number"
+              placeholder="시간"
+              onChange={onChange}
+              disabled={flip === false}
+            />
+          </div>
+          <button onClick={reset}>초기화</button>
+          <button onClick={invert}>전환</button>
+        </div>
+      );
+    }
+    function CmtoM() {
+      const [num, setNum] = React.useState();
+      const onChange = (event) => {
+        setNum(event.target.value);
+      };
+      const reset = () => {
+        setNum(0);
+      };
+      const [flip, setFlip] = React.useState(false);
+      const invert = () => {
+        setFlip(!flip);
+      };
+      return (
+        <div>
+          <div>
+            <label htmlFor="cm"></label>
+            <input
+              value={flip === true ? num * 100 : num}
+              onChange={onChange}
+              id="cm"
+              placeholder="CM"
+              type="number"
+              disabled={flip === true}
+            />
+          </div>
+          <div>
+            <label htmlFor="mm"></label>
+            <input
+              value={flip == false ? num / 100 : num}
+              onChange={onChange}
+              id="mm"
+              placeholder="M"
+              type="number"
+              disabled={flip === false}
+            />
+          </div>
+          <button onClick={reset}>초기화</button>
+          <button onClick={invert}>전환</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
