@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    function App() {
+      const [index, setIndex] = React.useState("0");
+      const onChange = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        <div>
+          <h1>Hello ! welcome our company</h1>
+          <select value={index} onChange={onChange}>
+            <option value="0">introduce our company</option>
+            <option value="1">Show you our CEO</option>
+            <option value="2">Button sample</option>
+          </select>
+          {index === "0" ? <Company /> : null}
+          {index === "1" ? <CEO /> : null}
+          {index === "2" ? <BtnT text="black" /> : null}
+        </div>
+      );
+    }
+    function Company() {
+      return (
+        <div>
+          <h2>This is our company</h2>
+        </div>
+      );
+    }
+    function CEO() {
+      return (
+        <div>
+          <h2>CEO age is 27</h2>
+        </div>
+      );
+    }
+    function Btn() {
+      return;
+      <div>
+        <BtnT text="level1" />;
+        <BtnT text="level2" />;
+        <BtnT text="level3" />;
+      </div>;
+    }
+    function BtnT(props) {
+      return (
+        <div>
+          <button
+            style={{
+              padding: "10px 20px",
+              borderRadius: 10,
+              border: 0,
+            }}
+          >
+            {props.text}
+          </button>
+        </div>
+      );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
