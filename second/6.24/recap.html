@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const root = document.getElementById("root");
+
+    function Big() {
+      const [index, setIndex] = React.useState("0");
+      const onChange = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        <div>
+          <select value={index} onChange={onChange}>
+            <option value="0">Btn Sample</option>
+            <option value="1">introduce Ceo</option>
+            <option value="2">way to Company</option>
+          </select>
+          {index === "0" ? <Show /> : null}
+          {index === "1" ? <Ceo /> : null}
+          {index === "2" ? <Way /> : null}
+        </div>
+      );
+    }
+    function Show() {
+      const [sample1, setSample1] = React.useState("sample1");
+      const [sample3, setSample3] = React.useState("sample3");
+      const onChange = () => {
+        setSample1("change");
+      };
+      const onChange2 = () => {
+        setSample3("change2");
+      };
+      return (
+        <div>
+          <h1>Btn Sample</h1>
+          <Btn text={sample1} fontSize={20} change={onChange} />
+          <Btn text="sample2" fontSize={10} />
+          <Btn text={sample3} fontSize={5} change={onChange2} />
+          <Btn text="sample4" fontSize={25} />
+        </div>
+      );
+    }
+    function Btn(props) {
+      return (
+        <div>
+          <button
+            onClick={props.change}
+            style={{
+              color: "green",
+              backgroundColor: "yellow",
+              padding: "10px 20px",
+              borderRadius: 10,
+              margin: "10px 0 0 0 ",
+              border: 0,
+              fontSize: props.fontSize,
+            }}
+          >
+            {props.text}
+          </button>
+        </div>
+      );
+    }
+    function Ceo() {
+      return (
+        <div>
+          <h1>CEO Name is park sang ha!</h1>
+        </div>
+      );
+    }
+    function Way() {
+      return (
+        <div>
+          <h1>Go Go Go!!Just Go!</h1>
+        </div>
+      );
+    }
+    ReactDOM.render(<Big />, root);
+  </script>
+</html>

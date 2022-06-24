@@ -20,41 +20,32 @@
       const onChange = (event) => {
         setIndex(event.target.value);
       };
+      const [value, setValue] = React.useState("why");
+      const onClick = () => {
+        setValue("wow");
+      };
       return (
         <div>
           <h1>Hello ! welcome our company</h1>
-          <select value={index} onChange={onChange}>
-            <option value="0">introduce our company</option>
-            <option value="1">Show you our CEO</option>
-            <option value="2">Button sample</option>
-          </select>
-          {index === "0" ? <Company /> : null}
-          {index === "1" ? <CEO /> : null}
-          {index === "2" ? <BtnT text="black" smile="yes" /> : null}
-        </div> //위와 같이 여러가지의 정보를 건낼 수 있다!
+          <MemoBtn onClick={onClick} text="hi" smile={value} />
+          <MemoBtn text="hi" smile="how" />
+        </div> //여기서의 onClick은 eventlistener가 아니다. prop이다.
+        //momo 여기서 바뀌는 것은 첫 번째 Btn 그러나 두 번째 Btn까지 re-render되니까
+        //이는 효율적 낭비이다. **그래서 그걸 못하게 하는 것이 "memo"이다.**
       );
     }
-    function Company() {
-      return (
-        <div>
-          <h2>This is our company</h2>
-        </div>
-      );
-    }
-    function CEO() {
-      return (
-        <div>
-          <h2>CEO age is 27</h2>
-        </div>
-      );
-    }
-    function BtnT(props) {
+    const MemoBtn = React.memo(Btn); //이런 기능을 사용하면 render는 변하는 부분만 해주고 이러면 오ㄹ와
+    //버그를 줄일 수 있다.
+    function Btn(props) {
       //console.log(props)=> object: props.text="level1"
       console.log(props);
       return (
         <div>
           <button
+            onClick={props.onClick} //여기에 다시 알려줘야한다.
             style={{
+              backgroundColor: "tomato",
+              color: "white",
               padding: "10px 20px",
               borderRadius: 10,
               border: 0,
