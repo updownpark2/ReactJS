@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.querySelector("#root");
+    const Forminput = function () {
+      const data = React.useState("없습니다!");
+      const [name, setName] = data;
+      return (
+        <div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setName(e.target[0].value);
+              e.target[0].value = "";
+            }}
+          >
+            <input placeholder="입력" />
+          </form>
+          <h3>{name}</h3>
+        </div>
+      );
+    };
+    const App = function () {
+      const data = React.useState(0);
+      const [count, setCount] = data;
+      //JSX에서는 변수를 {}안에 적어야한다.
+      return (
+        <div>
+          <h3>Total Click={count}</h3>
+          <button
+            onClick={() => {
+              setCount(count + 1);
+            }}
+          >
+            Click me
+          </button>
+          <Forminput />
+        </div>
+      );
+    };
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

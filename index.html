@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.querySelector("#root");
+
+    function App() {
+      const data = React.useState(0);
+      const [counter, setCounter] = data;
+      /*const onClick = () => {
+        modifier(222); //괄호안의값으로 변경 후 리렌더링해준다
+      };*/
+      console.log(data); //[undefined,f]
+      console.log(counter);
+      return (
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button
+            onClick={() => {
+              setCounter(counter + 1);
+            }}
+          >
+            Click me~
+          </button>
+        </div>
+      ); //App.js와 같은역할을 한다고보면된다.
+    }
+    ReactDOM.render(<App />, root); //사용자들에게 보여준다
+    //여기는 index.js의 역할과 같다.
+  </script>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="BTN">Click me!</button>
+  </body>
+  <script>
+    const Button = document.querySelector("#BTN");
+    const h1 = document.createElement("h1");
+    const body = document.querySelector("body");
+    body.appendChild(h1);
+    let count = 0;
+    h1.innerHTML = `<span>Total Clicks: ${count}</span>`;
+    Button.addEventListener("click", function (e) {
+      count++;
+      h1.innerHTML = `<span>Total Clicks: ${count}</span>`;
+    });
+  </script>
+</html>
