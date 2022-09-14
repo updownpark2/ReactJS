@@ -11,7 +11,6 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.querySelector("#root");
-
     function App() {
       const data = React.useState(0);
       const [counter, setCounter] = data;
@@ -25,7 +24,7 @@
           <h3>Total clicks: {counter}</h3>
           <button
             onClick={() => {
-              setCounter(counter + 1);
+              setCounter((count) => count + 1);
             }}
           >
             Click me~

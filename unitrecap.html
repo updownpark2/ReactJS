@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const box = document.querySelector("#box");
+    const Header = function () {
+      return <h1>어서오십쇼 , 단위변환기!</h1>;
+    };
+    const App = function () {
+      const [time, setTime] = React.useState();
+      const [flip, setFlip] = React.useState(true);
+      return (
+        <div>
+          <Header />
+          <label htmlFor="시간">시간</label>
+          <input
+            onChange={(e) => {
+              setTime(e.target.value); //여기가 변하면 time은 해당 input 의 value
+            }}
+            value={flip ? time : time / 60}
+            id="시간"
+            placeholder="시간"
+            type="number"
+            disabled={!flip}
+          ></input>
+          <label htmlFor="분">분</label>
+          <input
+            onChange={(e) => {
+              setTime(e.target.value); //여기가 변하면 time은 해당 input 의 value
+            }}
+            value={flip ? time * 60 : time} //상황에따라 사용하는 state를 다르게!
+            id="분"
+            placeholder="분"
+            type="number"
+            disabled={flip}
+          ></input>
+          <button
+            onClick={(e) => {
+              setTime(0);
+            }}
+          >
+            reset
+          </button>
+          <button
+            onClick={() => {
+              setFlip((current) => !current);
+            }}
+          >
+            flip
+          </button>
+        </div>
+      );
+    };
+    ReactDOM.render(<App />, box);
+  </script>
+</html>

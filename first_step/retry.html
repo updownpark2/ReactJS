@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const box = document.querySelector("#box");
+    const Header = function () {
+      return <h1>Welcome to our Website</h1>;
+    };
+    //이렇게해야 참조가 되네? arrow function으로 하니까 컴포넌트별로 넣기가 힘듬
+    const Count = function () {
+      const data = React.useState(0);
+      const [count, setCount] = data;
+      return (
+        <div>
+          <h2>Total Click : {count}</h2>{" "}
+          <button
+            onClick={() => {
+              setCount(count + 1);
+            }}
+          >
+            click
+          </button>
+        </div>
+      );
+    };
+
+    const App = function () {
+      return (
+        <div>
+          <Header />
+          <Count />
+        </div>
+      );
+    };
+    ReactDOM.render(<App />, box);
+  </script>
+</html>

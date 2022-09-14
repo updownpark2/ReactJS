@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const box = document.querySelector("#box");
+    const App = function () {
+      const [hour, setHour] = React.useState();
+      const [miniute, setMinute] = React.useState();
+      const [flip, setFlip] = React.useState(false);
+      return (
+        <div>
+          <h1>단위변환기</h1>
+          <form>
+            <label htmlFor="hour">시간!</label>
+            <input
+              onChange={(e) => {
+                setHour(e.target.value);
+              }}
+              id="hour"
+              plcaeholder="시간!"
+              type="number"
+              disabled={flip}
+            />
+            <label htmlFor="minutes">분!</label>
+            <input
+              value={flip ? hour : hour * 60}
+              id="minutes"
+              plcaeholder="분!"
+              type="number"
+              disabled={!flip} //조건식
+            />
+            <button
+              onClick={() => {
+                setHour(0);
+              }}
+            >
+              reset
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setFlip((current) => !current);
+              }}
+            >
+              flip
+            </button>
+          </form>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, box);
+  </script>
+</html>

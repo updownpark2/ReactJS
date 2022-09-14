@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const box = document.querySelector("#box");
+    const MinutesToHours = function () {
+      const [time, setTime] = React.useState();
+      const [flip, setFlip] = React.useState(true);
+
+      return (
+        <div>
+          <h3>H To M</h3>
+          <label htmlFor="시간">시간</label>
+          <input
+            onChange={(e) => {
+              setTime(e.target.value); //여기가 변하면 time은 해당 input 의 value
+            }}
+            value={flip ? time : time / 60}
+            id="시간"
+            placeholder="시간"
+            type="number"
+            disabled={!flip}
+          ></input>
+          <label htmlFor="분">분</label>
+          <input
+            onChange={(e) => {
+              setTime(e.target.value); //여기가 변하면 time은 해당 input 의 value
+            }}
+            value={flip ? time * 60 : time} //상황에따라 사용하는 state를 다르게!
+            id="분"
+            placeholder="분"
+            type="number"
+            disabled={flip}
+          ></input>
+          <button
+            onClick={(e) => {
+              setTime(0);
+            }}
+          >
+            reset
+          </button>
+          <button
+            onClick={() => {
+              setFlip((current) => !current);
+            }}
+          >
+            flip
+          </button>
+        </div>
+      );
+    };
+    const KmToMiles = function () {
+      const [distance, setDistance] = React.useState();
+      const [flip, setFlip] = React.useState(true);
+
+      return (
+        <div>
+          <h3>KM to M</h3>
+          <label hmtlFor="KM"></label>
+          <input
+            value={flip ? distance : distance / 1000}
+            id="KM"
+            placeholder="KM"
+            type="number"
+            disabled={!flip}
+            onChange={(e) => {
+              setDistance(e.target.value);
+            }}
+          ></input>
+          <label hmtlFor="M"></label>
+          <input
+            value={flip ? distance * 1000 : distance}
+            id="M"
+            placeholder="M"
+            type="number"
+            disabled={flip}
+            onChange={(e) => {
+              setDistance(e.target.value);
+            }}
+          ></input>
+          <button
+            onClick={() => {
+              setDistance(0);
+            }}
+          >
+            reset
+          </button>
+          <button
+            onClick={() => {
+              setFlip((current) => !current);
+            }}
+          >
+            flip
+          </button>
+        </div>
+      );
+    };
+    const App = function () {
+      const [index, setIndex] = React.useState("xx");
+      return (
+        <div>
+          <h1>단위변환기!</h1>
+          <select
+            value={index}
+            onChange={(e) => {
+              setIndex(e.target.value);
+            }}
+          >
+            <option value="xx">선택</option>
+            <option value="0">H TO M</option>
+            <option value="1">KM TO M</option>
+          </select>
+          {index === "xx" ? <h3>다음을 선택해주세요~</h3> : null}
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, box);
+  </script>
+</html>
