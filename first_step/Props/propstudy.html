@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const box = document.querySelector("#box");
+    //App에서 데이터를 관리하도록 컴포너트를 짜보았다.
+    const INVERT = function (props) {
+      const [flip, setFlip] = React.useState(true);
+
+      return (
+        <div>
+          <h1>{props.main}</h1>
+          <input
+            onChange={props.change}
+            value={flip ? props.amount : props.amount * props.num}
+            placeholder={props.HH}
+            type="number"
+            disabled={!flip}
+          ></input>
+          <input
+            onChange={props.change}
+            value={flip ? props.amount * props.num : props.amount}
+            placeholder={props.MM}
+            type="number"
+            disabled={flip}
+          ></input>
+          <button onClick={props.setAmount}>reset</button>
+          <button
+            onClick={() => {
+              setFlip((current) => !current);
+            }}
+          >
+            flip
+          </button>
+        </div>
+      );
+    };
+
+    const App = function () {
+      const [amount, setAmount] = React.useState();
+      const [amount2, setAmount2] = React.useState();
+      return (
+        <div>
+          <INVERT
+            change={(e) => {
+              setAmount(e.target.value);
+            }}
+            setAmount={() => {
+              setAmount(0);
+            }}
+            amount={amount}
+            main="시간 To 분"
+            HH="시간"
+            MM="분"
+            num={60}
+          />
+          <INVERT
+            setAmount={() => {
+              setAmount2(0);
+            }}
+            change={(e) => {
+              setAmount2(e.target.value);
+            }}
+            amount={amount2}
+            main="KM To M"
+            HH="KM"
+            MM="M"
+            num={1000}
+          />
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, box);
+  </script>
+</html>
